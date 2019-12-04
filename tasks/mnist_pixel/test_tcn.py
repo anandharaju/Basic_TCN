@@ -20,7 +20,7 @@ def get_x_y(size=1000):
     y_train[pos_indices, 0] = 1.0
     return x_train, y_train'''
     import pandas as pd
-    df = pd.read_csv("training.csv", header=None)
+    df = pd.read_csv("../../data/training.csv", header=None)
     data, label = df[0].values, df[1].values
     x_train, x_val, y_train, y_val = utils.train_test_split(data, label, 0.01, seed=1)
     return x_train, x_val, y_train, y_val
@@ -28,7 +28,7 @@ def get_x_y(size=1000):
 
 def train(model, x_train, x_val, y_train, y_val, max_len=102400, batch_size=1, shuffle=True):
     ear = EarlyStopping(monitor='loss', patience=50)
-    mcp = ModelCheckpoint("D:\\tcn.h5", monitor="loss", save_best_only=False, save_weights_only=False)
+    mcp = ModelCheckpoint("./tcn.h5", monitor="loss", save_best_only=False, save_weights_only=False)
     history = model.fit_generator(
         utils.data_generator(x_train, y_train, max_len, batch_size, shuffle),
         steps_per_epoch=len(x_train),
