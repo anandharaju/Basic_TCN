@@ -8,8 +8,8 @@ from tensorflow.keras.layers import Layer, Conv1D, Dense, BatchNormalization, La
 from keras.callbacks import ModelCheckpoint, EarlyStopping
 from keras.models import load_model
 import os
-# os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
-# os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 
 def get_x_y(size=1000):
     '''import numpy as np
@@ -20,7 +20,7 @@ def get_x_y(size=1000):
     y_train[pos_indices, 0] = 1.0
     return x_train, y_train'''
     import pandas as pd
-    df = pd.read_csv("D:\\03_GitWorks\\Huawei_echelon\\data\\training.csv", header=None)
+    df = pd.read_csv("training.csv", header=None)
     data, label = df[0].values, df[1].values
     x_train, x_val, y_train, y_val = utils.train_test_split(data, label, 0.01, seed=1)
     return x_train, x_val, y_train, y_val
